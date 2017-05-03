@@ -58,6 +58,7 @@ fi
 # Mount options to use for ext3 and xfs disks (the ephemeral disks
 # are ext3, but we use xfs for EBS volumes to format them faster)
 XFS_MOUNT_OPTS="defaults,noatime,allocsize=8m"
+EXT3_MOUNT_OPTS="defaults,noatime"
 
 function setup_ebs_volume {
   device=$1
@@ -68,7 +69,7 @@ function setup_ebs_volume {
       mkdir $mount_point
       # yum install -q -y xfsprogs
       if mkfs.ext3 -q $device; then
-        mount -o $XFS_MOUNT_OPTS $device $mount_point
+        mount -o $EXT3_MOUNT_OPTS $device $mount_point
         chmod -R a+w $mount_point
       else
         # mkfs.xfs is not installed on this machine or has failed;
