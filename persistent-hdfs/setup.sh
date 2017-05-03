@@ -17,6 +17,22 @@ if [[ ! -e /vol/persistent-hdfs/dfs/name ]] ; then
   $PERSISTENT_HDFS/bin/hadoop namenode -format
 fi
 
-echo "Persistent HDFS installed, won't start by default..."
+echo "Starting persistent HDFS..."
+
+# This is different depending on version.
+case "$HADOOP_MAJOR_VERSION" in
+  1)
+    $PERSISTENT_HDFS/bin/start-dfs.sh
+    ;;
+  2)
+    $PERSISTENT_HDFS/sbin/start-dfs.sh
+    ;;
+  yarn) 
+    $PERSISTENT_HDFS/sbin/start-dfs.sh
+    ;;
+  *)
+     echo "ERROR: Unknown Hadoop version"
+     return -1
+esac
 
 popd > /dev/null

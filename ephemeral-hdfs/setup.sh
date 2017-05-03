@@ -26,18 +26,18 @@ else
   $EPHEMERAL_HDFS/bin/hadoop namenode -format
 fi
 
-echo "Starting ephemeral HDFS..."
+echo "Ephemeral HDFS installed, won't start by default..."
 
 # This is different depending on version.
 case "$HADOOP_MAJOR_VERSION" in
   1)
-    $EPHEMERAL_HDFS/bin/start-dfs.sh
+    echo "Nothing to be done."
     ;;
   2)
-    $EPHEMERAL_HDFS/sbin/start-dfs.sh
+    echo "Nothing to be done."
     ;;
   yarn) 
-    $EPHEMERAL_HDFS/sbin/start-dfs.sh
+    # $EPHEMERAL_HDFS/sbin/start-dfs.sh
     echo "Starting YARN"
     $EPHEMERAL_HDFS/sbin/start-yarn.sh
     ;;
