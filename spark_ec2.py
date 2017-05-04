@@ -110,7 +110,7 @@ DEFAULT_SPARK_GITHUB_REPO = "https://github.com/apache/spark"
 
 # Default location to get the spark-ec2 scripts (and ami-list) from
 DEFAULT_SPARK_EC2_GITHUB_REPO = "https://github.com/SiGe/spark-ec2"
-DEFAULT_SPARK_EC2_BRANCH = "cs425"
+DEFAULT_SPARK_EC2_BRANCH = "omid"
 
 
 def setup_external_libs(libs):
@@ -280,7 +280,7 @@ def parse_args():
         help="If specified, launch slaves as spot instances with the given " +
              "maximum price (in dollars)")
     parser.add_option(
-        "--ganglia", action="store_true", default=True,
+        "--ganglia", action="store_true", default=False,
         help="Setup Ganglia monitoring on cluster (default: %default). NOTE: " +
              "the Ganglia page will be publicly accessible")
     parser.add_option(
@@ -844,7 +844,7 @@ def setup_cluster(conn, master_nodes, slave_nodes, opts, deploy_ssh_key):
             print(slave_address)
             ssh_write(slave_address, opts, ['tar', 'x'], dot_ssh_tar)
 
-    modules = ['spark', 'ephemeral-hdfs', 'persistent-hdfs',
+    modules = ['spark', 'persistent-hdfs', #'ephemeral-hdfs', 
                'mapreduce', 'spark-standalone', 'tachyon', 'rstudio']
 
     if opts.hadoop_major_version == "1":

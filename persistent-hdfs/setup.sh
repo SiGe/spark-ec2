@@ -2,10 +2,15 @@
 
 PERSISTENT_HDFS=/root/persistent-hdfs
 
+# Set hdfs url to make it easier
+HDFS_URL="hdfs://$PUBLIC_DNS:9010"
+echo "export HDFS_URL=$HDFS_URL" >> ~/.bash_profile
+
 pushd /root/spark-ec2/persistent-hdfs > /dev/null
 source ./setup-slave.sh
 
 for node in $SLAVES $OTHER_MASTERS; do
+  echo $node
   ssh -t $SSH_OPTS root@$node "/root/spark-ec2/persistent-hdfs/setup-slave.sh" & sleep 0.3
 done
 wait
@@ -29,10 +34,10 @@ case "$HADOOP_MAJOR_VERSION" in
     ;;
   yarn) 
     $PERSISTENT_HDFS/sbin/start-dfs.sh
+    $PERSISTENT_HDFS/sbin/start-yarn.sh
     ;;
   *)
      echo "ERROR: Unknown Hadoop version"
      return -1
 esac
-
 popd > /dev/null
