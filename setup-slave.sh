@@ -81,7 +81,7 @@ function setup_ebs_volume {
       # EBS volume is already formatted. Mount it if its not mounted yet.
       if ! grep -qs '$mount_point' /proc/mounts; then
         mkdir $mount_point
-        mount -o $XFS_MOUNT_OPTS $device $mount_point
+        mount -o $EXT3_MOUNT_OPTS $device $mount_point
         chmod -R a+w $mount_point
       fi
     fi
