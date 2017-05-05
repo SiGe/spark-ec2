@@ -22,6 +22,7 @@
   </property>
 
   <!-- TODO: Should we use multiple local-dirs -->
+  <!--
   <property>
     <name>yarn.nodemanager.local-dirs</name>
     <value>/mnt/yarn-local</value>
@@ -31,6 +32,7 @@
     <name>yarn.nodemanager.log-dirs</name>
     <value>/mnt/yarn-logs</value>
   </property>
+  -->
 
   <property>
     <name>yarn.log-aggregation-enable</name>

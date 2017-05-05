@@ -95,7 +95,7 @@ IFS=
 #if [ "$YARN_LOG_DIR" = "" ]; then
 #  YARN_LOG_DIR="$HADOOP_YARN_HOME/logs"
 #fi
-export YARN_LOG_DIR=/mnt/persistent-hdfs/logs
+export YARN_LOG_DIR=/vol/persistent-hdfs/logs
 
 if [ "$YARN_LOGFILE" = "" ]; then
   YARN_LOGFILE='yarn.log'
